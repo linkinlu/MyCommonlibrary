@@ -8,28 +8,69 @@ using System.Threading.Tasks;
 
 namespace SCSCommon.Convertion
 {
-    public class BasicConvert
+    public static class BasicConvert
     {
-        public static T To<T>(object value)
+
+        //refer from James Craig utilities library
+        public static R To<T, R>(this T Object, R DefaultValue = default(R))
         {
-            return (T)To(value, typeof(T));
+            return (R) To(Object, typeof(R), DefaultValue);
         }
 
-        public static object To(object value, Type destinationType)
+        private static object To<T>(T Item, Type ResultType, object DefaultValue = null)
         {
-            return To(value, destinationType, CultureInfo.InvariantCulture);
-        }
-
-        private static object To(object value, Type destinationType, CultureInfo culture)
-        {
-            if (value != null)
+            try
             {
-                if (destinationType.IsEnum && value is int)
-                    return Enum.ToObject(destinationType, (int)value);
-                if (!destinationType.IsInstanceOfType(value))
-                    return Convert.ChangeType(value, destinationType, culture);
+                if (Item == null)
+                {
+                    return (DefaultValue == null && ResultType.IsValueType) ?
+                        Activator.CreateInstance(ResultType) :
+                        DefaultValue;
+                }
+                var ObjectType = Item.GetType();
+                if (ObjectType == typeof(DBNull))
+                {
+                    return (DefaultValue == null && ResultType.IsValueType) ?
+                        Activator.CreateInstance(ResultType) :
+                        DefaultValue;
+                }
+                if (ResultType.IsAssignableFrom(ObjectType))
+                    return Item;
+                if (Item as IConvertible != null && !ObjectType.IsEnum && !ResultType.IsEnum)
+                    return Convert.ChangeType(Item, ResultType, CultureInfo.InvariantCulture);
+                var Converter = TypeDescriptor.GetConverter(Item);
+                if (Converter.CanConvertTo(ResultType))
+                    return Converter.ConvertTo(Item, ResultType);
+                Converter = TypeDescriptor.GetConverter(ResultType);
+                if (Converter.CanConvertFrom(ObjectType))
+                    return Converter.ConvertFrom(Item);
+                if (ResultType.IsEnum)
+                {
+                    if (ObjectType == ResultType.GetEnumUnderlyingType())
+                        return System.Enum.ToObject(ResultType, Item);
+                    if (ObjectType == typeof(string))
+                        return System.Enum.Parse(ResultType, Item as string, true);
+                }
+                // 类的比对 TODO:Should automap and copy value to destinty
+                if (ResultType.IsClass)
+                {
+                    //var ReturnValue = Activator.CreateInstance(ResultType);
+                    //var TempMapping = ObjectType.MapTo(ResultType);
+                    //if (TempMapping == null)
+                    //    return ReturnValue;
+                    //TempMapping
+                    //    .AutoMap()
+                    //    .Copy(Item, ReturnValue);
+                    return null;
+                }
             }
-            return value;
+            catch
+            {
+            }
+            return (DefaultValue == null && ResultType.IsValueType) ?
+                Activator.CreateInstance(ResultType) :
+                DefaultValue;
         }
+
     }
 }
