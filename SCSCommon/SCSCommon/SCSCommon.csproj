@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,8 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\ExpireCacheScope\BaseCacheExpireManager.cs" />
+    <Compile Include="Cache\ExpireCacheScope\HttpContextCacheManager.cs" />
+    <Compile Include="Cache\ExpireCacheScope\ICacheExpireScope.cs" />
+    <Compile Include="Cache\ExpireCacheScope\MemoryCacheManager.cs" />
+    <Compile Include="Cache\ExpireCacheScope\RedisCacheManager.cs" />
     <Compile Include="Convertion\BasicConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="GolbalResources\" />
+    <Folder Include="IO\" />
+    <Folder Include="Serialization\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheTest\ExpireCacheScope\MemoryCacheManagerTest.cs" />
     <Compile Include="ConvertionTest\BasicConverTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
