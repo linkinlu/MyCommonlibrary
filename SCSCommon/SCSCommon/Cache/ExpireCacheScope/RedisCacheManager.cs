@@ -6,41 +6,38 @@ using System.Threading.Tasks;
 
 namespace SCSCommon.Cache.ExpireCacheScope
 {
-    public class RedisCacheManager: BaseCacheExpireManager
+    public class RedisCacheManager//: ICacheExpireScope
     {
-        public override void Add(string key, object data, TimeSpan expireTime, IEnumerable<string> Tags)
+        public   void Add(string key, object data, TimeSpan expireTime)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public override T Get<T>(string key)
+        //public  T Get<T>(string key)
+        //{
+        //    return null;
+        //}
+
+        public  bool ContainKey(string key)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
-        public override bool ContainKey(string key)
+        public  void Clear()
         {
-            throw new NotImplementedException();
+           
         }
 
-        public override void Clear()
+        public  void Remove(string key)
         {
-            throw new NotImplementedException();
+           
         }
 
-        public override void Remove(string key)
-        {
-            throw new NotImplementedException();
-        }
+   
 
-        public override void RemoveByTags(IEnumerable<string> tags)
+        public  void Dispose()
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Dispose()
-        {
-            throw new NotImplementedException();
+           
         }
     }
 }

@@ -8,56 +8,37 @@ using System.Threading.Tasks;
 
 namespace SCSCommon.Cache.ExpireCacheScope
 {
-    public class MemoryCacheManager : BaseCacheExpireManager
+    public class MemoryCacheManager : ICacheExpireScope
     {
-        private ConcurrentDictionary<string, List<string>> tagContainer = new ConcurrentDictionary<string, List<string>>();
+        //private ConcurrentDictionary<string,string> tagContainer = new ConcurrentDictionary<string, string>();
         protected ObjectCache InternalCache
         {
             get { return MemoryCache.Default; }
         }
 
-        public override void Add(string key, object data, TimeSpan expireTime,IEnumerable<String> tags = null)
+        public  void Add(string key, object data, TimeSpan expireTime)
         {
             if (data == null)
                 return;
 
             if (!InternalCache.Contains(key))
             {
-                InternalCache.Add(new CacheItem(key, data), new CacheItemPolicy() { AbsoluteExpiration = DateTime.Now + expireTime });
-                if (tags != null && tags.Any())
-                {
-                    tags.ToList().ForEach(t =>
-                    {
-                        if (!tagContainer.ContainsKey(t))
-                        {
-                            //first add
-                            var keys = new List<string>() {key};
-                            tagContainer.TryAdd(t, keys);
-                        }
-                        else
-                        {
-                            if (!tagContainer[t].Contains(key))
-                            {
-                                tagContainer[t].Add(key);
-                            }
-                        }
-
-                    });
-                }
+                InternalCache.Add(new CacheItem(key, data),
+                    new CacheItemPolicy() {AbsoluteExpiration = DateTime.Now + expireTime});
             }
         }
 
-        public override T Get<T>(string key)
+        public  T Get<T>(string key)
         {
             return InternalCache.Contains(key) ? (T)InternalCache.Get(key) : default(T);
         }
 
-        public override bool ContainKey(string key)
+        public  bool ContainKey(string key)
         {
             return InternalCache.Contains(key);
         }
 
-        public override void Clear()
+        public  void Clear()
         {
             foreach (var item in InternalCache)
             {
@@ -67,47 +48,23 @@ namespace SCSCommon.Cache.ExpireCacheScope
         }
 
        
-        public override void Remove(string key)
+        public void Remove(string key)
         {
             InternalCache.Remove(key);
+        }
 
-            foreach (var item in tagContainer)
+        public void RemoveByPattern(string parttern)
+        {
+            if (!string.IsNullOrEmpty(parttern))
             {
-                //when tag container has only one cache key, it should also remove the tag
-                if (item.Value.Contains(key) && item.Value.Count == 1)
-                {
-                    List<string> result;
-                    tagContainer.TryRemove(item.Key, out result);
-                }
-               
+                this.RemovebyPattern(parttern, InternalCache.Select(x => x.Key));
             }
-
         }
 
 
-
-
-        public override void RemoveByTags(IEnumerable<string> tags)
+        public void Dispose()
         {
-            tags.ToList().ForEach(t =>
-            {
-                if (tagContainer.ContainsKey(t))
-                {
-                    List<string> result;
-                    if (tagContainer.TryRemove(t, out result))
-                    {
-                        if (result != null && result.Any())
-                        {
-                            result.ForEach(key => InternalCache.Remove(key));
-                        }
-                    }
-                }
-            });
-        }
-
-        public override void Dispose()
-        {
-            tagContainer = null;
+          
             
         }
     }

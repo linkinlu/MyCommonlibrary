@@ -9,10 +9,12 @@ namespace SCSCommon.Cache.ExpireCacheScope
     /// <summary>
     /// 有过期机制的缓存
     /// </summary>
-    interface ICacheExpireScope :IDisposable
+    interface ICacheExpireScope : IDisposable
     {
 
-        void Add(string key, object data, TimeSpan expireTime, IEnumerable<string> tags = null);
+      
+
+        void Add(string key, object data, TimeSpan expireTime);
 
         T Get<T>(string key);
 
@@ -22,6 +24,7 @@ namespace SCSCommon.Cache.ExpireCacheScope
 
         void Remove(string key);
 
-        void RemoveByTags(IEnumerable<string> tags);
+        void RemoveByPattern(string parttern);
+
     }
 }

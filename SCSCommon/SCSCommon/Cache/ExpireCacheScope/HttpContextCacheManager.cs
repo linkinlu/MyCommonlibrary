@@ -1,46 +1,73 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Caching;
 
 namespace SCSCommon.Cache.ExpireCacheScope
 {
-    public class HttpContextCacheManager : BaseCacheExpireManager
+    public class HttpContextCacheManager : ICacheExpireScope
     {
-        public override void Add(string key, object data, TimeSpan expireTime, IEnumerable<string> Tags)
+
+        private List<string> keys = new List<string>();
+        public  System.Web.Caching.Cache Cache
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    throw new Exception("Cache should be in HttpModule");
+                }
+                return HttpContext.Current.Cache;
+            }
         }
 
-        public override void Clear()
+        public  void Clear()
         {
-            throw new NotImplementedException();
+            foreach (string key in Cache)
+            {
+                Remove(key);
+            }
+            keys.Clear();
         }
 
-        public override bool ContainKey(string key)
+        public  bool ContainKey(string key)
         {
-            throw new NotImplementedException();
+            return keys.Contains(key);
         }
 
-        public override void Dispose()
+        public  void Dispose()
         {
-            throw new NotImplementedException();
+            keys = null;
         }
 
-        public override T Get<T>(string key)
+        public  void Add(string key, object data, TimeSpan expireTime)
         {
-            throw new NotImplementedException();
+            if (!keys.Contains(key))
+            {
+                Cache.Add(key, data, null, System.Web.Caching.Cache.NoAbsoluteExpiration
+                    , expireTime, CacheItemPriority.Normal, null);
+            }
         }
 
-        public override void Remove(string key)
+        public  T Get<T>(string key)
         {
-            throw new NotImplementedException();
+            return (T) Cache.Get(key);
         }
 
-        public override void RemoveByTags(IEnumerable<string> tags)
+        public  void Remove(string key)
         {
-            throw new NotImplementedException();
+            Cache.Remove(key);
+            keys.Remove(key);
+        }
+
+        public void RemoveByPattern(string parttern)
+        {
+            this.RemovebyPattern(parttern, keys);
         }
     }
 }
