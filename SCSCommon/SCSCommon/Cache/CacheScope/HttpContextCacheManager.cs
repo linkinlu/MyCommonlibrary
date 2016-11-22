@@ -45,12 +45,12 @@ namespace SCSCommon.Cache.ExpireCacheScope
             keys = null;
         }
 
-        public  void Add(string key, object data, TimeSpan expireTime)
+        public  void Add(string key, object data, TimeSpan? expireTime=null)
         {
             if (!keys.Contains(key))
             {
                 Cache.Add(key, data, null, System.Web.Caching.Cache.NoAbsoluteExpiration
-                    , expireTime, CacheItemPriority.Normal, null);
+                    , (expireTime ?? TimeSpan.MaxValue), CacheItemPriority.Normal, null);
             }
         }
 

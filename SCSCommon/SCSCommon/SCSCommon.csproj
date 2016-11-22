@@ -30,11 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\nopCommerce\src\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="StackExchange.Redis, Version=1.1.608.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StackExchange.Redis.1.1.608\lib\net45\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Caching" />
@@ -47,13 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cache\ExpireCacheScope\CacheExtension.cs" />
-    <Compile Include="Cache\ExpireCacheScope\HttpContextCacheManager.cs" />
-    <Compile Include="Cache\ExpireCacheScope\ICacheExpireScope.cs" />
-    <Compile Include="Cache\ExpireCacheScope\IRedisCacheWrapper.cs" />
-    <Compile Include="Cache\ExpireCacheScope\MemoryCacheManager.cs" />
-    <Compile Include="Cache\ExpireCacheScope\RedisCacheManager.cs" />
-    <Compile Include="Cache\ExpireCacheScope\RedisCacheManagerWrapper.cs" />
+    <Compile Include="Cache\CacheScope\CacheExtension.cs" />
+    <Compile Include="Cache\CacheScope\HttpContextCacheManager.cs" />
+    <Compile Include="Cache\CacheScope\ICacheExpireScope.cs" />
+    <Compile Include="Cache\CacheScope\IRedisCacheWrapper.cs" />
+    <Compile Include="Cache\CacheScope\MemoryCacheManager.cs" />
+    <Compile Include="Cache\CacheScope\RedisCacheManager.cs" />
+    <Compile Include="Cache\CacheScope\RedisCacheManagerWrapper.cs" />
+    <Compile Include="Configuration\ConfigManager.cs" />
     <Compile Include="Configuration\RedisConfig.cs" />
     <Compile Include="Convertion\BasicConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +68,7 @@
     <Folder Include="Extensions\" />
     <Folder Include="GolbalResources\" />
     <Folder Include="IO\" />
+    <Folder Include="Mail\" />
     <Folder Include="Serialization\" />
   </ItemGroup>
   <ItemGroup>

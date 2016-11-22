@@ -12,9 +12,9 @@ namespace SCSCommon.Cache.ExpireCacheScope
     interface ICacheExpireScope : IDisposable
     {
 
-      
 
-        void Add(string key, object data, TimeSpan expireTime);
+
+        void Add(string key, object data, TimeSpan? expireTime = null);
 
         T Get<T>(string key);
 

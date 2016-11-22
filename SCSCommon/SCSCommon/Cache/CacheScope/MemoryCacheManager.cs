@@ -16,7 +16,7 @@ namespace SCSCommon.Cache.ExpireCacheScope
             get { return MemoryCache.Default; }
         }
 
-        public  void Add(string key, object data, TimeSpan expireTime)
+        public  void Add(string key, object data, TimeSpan? expireTime=null)
         {
             if (data == null)
                 return;
@@ -24,7 +24,10 @@ namespace SCSCommon.Cache.ExpireCacheScope
             if (!InternalCache.Contains(key))
             {
                 InternalCache.Add(new CacheItem(key, data),
-                    new CacheItemPolicy() {AbsoluteExpiration = DateTime.Now + expireTime});
+                    new CacheItemPolicy()
+                    {
+                        AbsoluteExpiration = DateTime.Now + (expireTime ?? TimeSpan.MaxValue)
+                    });
             }
         }
 
