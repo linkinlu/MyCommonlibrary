@@ -25,7 +25,7 @@ namespace SCSCommon.Cache.ExpireCacheScope
 
         private string GetConnectionString()
         {
-            return _config.RedisCachingConnectionString;
+            return _config.RedisConnectionString;
         }
 
         private ConnectionMultiplexer GetConnection()
