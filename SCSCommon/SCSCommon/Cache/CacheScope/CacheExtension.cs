@@ -15,5 +15,28 @@ namespace SCSCommon.Cache.ExpireCacheScope
             keys.Where(p => regex.IsMatch(p.ToString())).ToList().ForEach(scope.Remove);
         }
 
+        /// <summary>
+        /// 根据key找到value  如果找不到value 就回调acquire的值并且缓存
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scope"></param>
+        /// <param name="key"></param>
+        /// <param name="expiretime"></param>
+        /// <param name="acquire"></param>
+        public static T Get<T>(this ICacheExpireScope scope, string key,  Func<T> acquire , TimeSpan? expiretime = null)
+        {
+            if (scope.ContainKey(key) && scope.Get<T>(key) != null)
+            {
+                return scope.Get<T>(key);
+            }
+
+            var cacheItem = acquire();
+            if (cacheItem != null)
+            {
+                scope.Add(key, cacheItem, expiretime.HasValue ? expiretime.Value : TimeSpan.MaxValue);
+            }
+            return cacheItem;
+        }
+
     }
 }

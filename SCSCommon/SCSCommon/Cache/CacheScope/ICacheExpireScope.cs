@@ -9,7 +9,7 @@ namespace SCSCommon.Cache.ExpireCacheScope
     /// <summary>
     /// 有过期机制的缓存
     /// </summary>
-    interface ICacheExpireScope : IDisposable
+    public interface ICacheExpireScope : IDisposable
     {
 
 

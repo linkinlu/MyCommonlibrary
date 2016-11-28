@@ -11,13 +11,13 @@ namespace SCSCommon.Cache.ExpireCacheScope
 {
    public  class RedisConnectionWrapper : IRedisCacheWrapper
     {
-        private readonly RedisConfig _config;
+        private readonly RedisSection _config;
         private readonly Lazy<string> _connectionString;
 
         private volatile ConnectionMultiplexer _connection;
         private readonly object _lock = new object();
 
-        public RedisConnectionWrapper(RedisConfig config)
+        public RedisConnectionWrapper(RedisSection config)
         {
             this._config = config;
             this._connectionString = new Lazy<string>(GetConnectionString);
@@ -25,7 +25,8 @@ namespace SCSCommon.Cache.ExpireCacheScope
 
         private string GetConnectionString()
         {
-            return _config.RedisConnectionString;
+            return string.Empty;
+            //return _config.RedisConfigSection.CurrentConfiguration.ConnectionStrings;
         }
 
         private ConnectionMultiplexer GetConnection()
