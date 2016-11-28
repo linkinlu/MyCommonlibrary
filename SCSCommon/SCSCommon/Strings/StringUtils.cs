@@ -23,17 +23,11 @@ namespace SCSCommon.Strings
 
             var result = content;
             sensitiveChars.Each<string>(t =>
-            {
-
-#if DEBUG
-                Debug.Print(result);
-#endif
-
+            { 
                 result = result.Replace(t, repleaceChar);
             }
             );
             return result;
-
         }
 
 
