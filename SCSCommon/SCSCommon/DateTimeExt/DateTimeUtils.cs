@@ -6,9 +6,6 @@ namespace SCSCommon.DateTimeExt
     {
        
 
-
-
-
         public static string ToHHmmss(this DateTime date,string dateSpliter = DateSpliterConstant.dateSpliter,string timeSpliter = DateSpliterConstant.timeSpliter)
         {
             return date.ToString(string.Format("HH{0}mm{0}ss", timeSpliter));
@@ -87,9 +84,9 @@ namespace SCSCommon.DateTimeExt
 
     public class DateSpliterConstant
     {
-        public const string dateSpliter = "/";
+        public const string dateSpliter = "";
 
-        public const string timeSpliter = ":";
+        public const string timeSpliter = "";
 
     }
 }

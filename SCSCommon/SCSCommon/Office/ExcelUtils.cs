@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SCSCommon.Directory;
 using System.IO;
+using NPOI.SS.UserModel;
+using SCSCommon.Strings;
+using SCSCommon.DateTimeExt;
 
 namespace SCSCommon.Office
 {
@@ -18,23 +21,40 @@ namespace SCSCommon.Office
         }
 
         /// <summary>
-        /// 
+        /// Exports to excel2003.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="basePath"></param>
-        /// <param name="entity"></param>
-        public static void ExportToExcel2003<T>(string basePath,T entity,string fileName = null)
+        /// <param name="basePath">The base path.</param>
+        /// <param name="entity">The entity.</param>
+        /// <param name="fileName">Name of the file.</param>
+        public static void ExportToExcel2003<T>(string basePath, T entity, string fileName = "")
         {
-           
+            if (entity == null) return;
+            if (!basePath.IsVaildFilePath()) return;
 
-            CommonDirectoryHelper.MapPath(basePath);
 
-            if (string.IsNullOrEmpty(fileName))
+            var fullName = Path.Combine(basePath,
+                string.IsNullOrEmpty(fileName) ? DateTime.Now.ToyyyyMMddHHmmss() : fileName + ".xls");
+
+            try
             {
-                //fileName = DateTime.Now.ToString("yyyyMM");
+                var objType = typeof(T);
+                 //if(objType.IsClass &&)  
+                var book = new HSSFWorkbook();
+                ISheet sheet = book.CreateSheet();
+               
+
+
+
+
+
+
             }
-
-
+            catch (Exception)
+            {
+                
+               
+            }
 
         }
 
