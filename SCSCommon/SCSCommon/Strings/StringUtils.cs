@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,12 +12,39 @@ namespace SCSCommon.Strings
 {
     public static class StringUtils
     {
+        /// <summary>
+        /// Determines whether [is mail address].
+        /// </summary>
+        /// <param name="address">The address.</param>
+        /// <returns>
+        ///   <c>true</c> if [is mail address] [the specified address]; otherwise, <c>false</c>.
+        /// </returns>
         public static bool IsMailAddress(this string address)
         {
             return VerifyWithRegex(address);
         }
 
+        /// <summary>
+        /// Determines whether [is vaild file path].
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns>
+        ///   <c>true</c> if [is vaild file path] [the specified file name]; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsVaildFilePath(this string fileName)
+        {
+            Regex containsABadCharacter = new Regex("^([a-zA-Z]:)?(\\\\[^<>:\"/\\\\|?*]+)+\\\\?$");
+            return !containsABadCharacter.IsMatch(fileName);
+        }
 
+
+        /// <summary>
+        /// Replaces the sensitive character.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <param name="sensitiveChars">The sensitive chars.</param>
+        /// <param name="repleaceChar">The repleace character.</param>
+        /// <returns></returns>
         public static string ReplaceSensitiveChar(this string content, string[] sensitiveChars,string repleaceChar)
         {
             if (sensitiveChars == null || !sensitiveChars.Any()) return content;

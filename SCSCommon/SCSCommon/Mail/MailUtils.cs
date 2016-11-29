@@ -12,8 +12,9 @@ namespace SCSCommon.Mail
 
         public static void SendMail()
         {
+            //helper.SendMail()
 
-           
+
         }
         
        

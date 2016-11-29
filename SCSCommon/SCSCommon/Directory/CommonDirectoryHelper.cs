@@ -11,7 +11,7 @@ namespace SCSCommon.Directory
     public class CommonDirectoryHelper
     {
         /// <summary>
-        /// 通用于web及app的路径搜索
+        /// 通用于web及app的路径搜索,只适应于在appfolder
         /// </summary>
         /// <param name="path">格式"~/*****"</param> 
         /// <returns></returns>
@@ -26,6 +26,9 @@ namespace SCSCommon.Directory
             ///有点忘记了 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！ 温故知新
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path.Replace("~/", "\\").TrimStart('/').Replace("/", "\\"));
         }
+
+
+        
 
     }
 }

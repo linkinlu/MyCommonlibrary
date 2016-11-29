@@ -8,6 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+  //<redisSection xmlns = "SCSCommon" >
+  //  <redises>
+  //    <redisElement connectionString = "127.0.0.1" name= "redisA" />
+  //    < redisElement connectionString= "127.0.0.2" name= "redisB" />
+  //  </ redises >
+  //</ redisSection >
 
 /// <summary>
 /// 这个vs插件叫做configuration section manager 可在extension找到并配置!!!!!!!!!!
