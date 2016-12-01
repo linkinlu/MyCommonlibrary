@@ -12,10 +12,12 @@ using System.Threading.Tasks;
 
 namespace SCSCommon.Mail
 {
+
+   ///相比之下https://github.com/jstedfast/MailKit 当前这个弱爆了!!!! 而且只支持SMTP
     internal class MailHelper
     {
-        public Action SendSuccess;
-        public Action<string> SendFail;
+
+        public event Action<bool, string> AfterSender;
 
         private static EmailSetting setting = null;
 
@@ -30,65 +32,74 @@ namespace SCSCommon.Mail
 
         internal void SendMail(string from, string to ,string content, string title = null,string[] bcc = null , string[] cc = null,string[] attachments = null)
         {
-            this.SendMail(from, new string[] { to }, title, content);
+            this.SendMail(from, new string[] { to }, title, content, bcc, cc, attachments);
         }
 
 
         internal void SendMail(string from, string[] to,  string content, string title = null, string[] bcc = null, string[] cc = null, string[] attachments = null)
         {
-            this.SendMails(from, to, title, content);
+            this.SendMails(from, to, content, title, bcc, cc, attachments);
         }
 
-        private void SendMails(string from, string[] to, string content, string title = null, string[] bcc = null, string[] cc = null, string[] attachments = null)
+        private void SendMails(string from, string[] to, string content, string title = null, string[] bcc = null,
+            string[] cc = null, string[] attachments = null)
         {
 
             try
             {
-                if (setting == null || !setting.IsMailEnable) return;
-                if (!to.Each<string>(s => VerifyWithRegex(s)) || !from.IsMailAddress()) throw new Exception("地址格式不正确");
-                if (bcc != null && bcc.Any() && !bcc.Each<string>(s => VerifyWithRegex(s))) throw new Exception("地址格式不正确");
-                if (cc != null && bcc.Any() && !cc.Each<string>(s => VerifyWithRegex(s))) throw new Exception("地址格式不正确");
+                if (setting == null || !setting.IsMailEnable) throw new Exception("邮箱没有开启或者设置不正确");
+                if (!to.Each<string>(VerifyWithRegex) || !from.IsMailAddress()) throw new Exception("地址格式不正确");
+                if (bcc != null && bcc.Any() && !bcc.Each<string>(VerifyWithRegex))
+                    throw new Exception("地址格式不正确");
+                if (cc != null && bcc.Any() && !cc.Each<string>(VerifyWithRegex))
+                    throw new Exception("地址格式不正确");
 
 
 
 
-                SmtpClient client = new SmtpClient(setting.Address, setting.Port) { Credentials = new NetworkCredential(setting.UserName, setting.Password), EnableSsl = setting.EnableSSL, DeliveryMethod = SmtpDeliveryMethod.Network, Timeout = setting.Timeout };
+                SmtpClient client = new SmtpClient(setting.Address, setting.Port)
+                {
+                    Credentials = new NetworkCredential(setting.UserName, setting.Password),
+                    EnableSsl = setting.EnableSSL,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    Timeout = setting.Timeout
+                };
 
 
 
-                MailMessage message = new MailMessage() { SubjectEncoding = Encoding.UTF8, IsBodyHtml = true, BodyEncoding = Encoding.UTF8 };
+                MailMessage message = new MailMessage()
+                {
+                    SubjectEncoding = Encoding.UTF8,
+                    IsBodyHtml = true,
+                    BodyEncoding = Encoding.UTF8
+                };
                 to.Each(t => message.To.Add(t));
                 if (bcc != null && bcc.Any()) bcc.Each(t => message.Bcc.Add(t));
                 if (cc != null && bcc.Any()) cc.Each(t => message.CC.Add(t));
 
-                if (attachments != null && attachments.Any()) attachments.Each(t => message.Attachments.Add(new Attachment(t)));
+                if (attachments != null && attachments.Any())
+                    attachments.Each(t => message.Attachments.Add(new Attachment(t)));
 
                 if (setting.IsAsyn)
-                    {
-                        client.SendAsync(message, null);
-                    }
-                    else
-                    {
-                        client.Send(message);
-                    }
+                {
+                    client.SendAsync(message, null);
+                }
+                else
+                {
+                    client.Send(message);
+                }
+
+                AfterSender?.Invoke(true, string.Empty);
             }
             catch (Exception ex)
             {
-                SendFail?.Invoke(ex.Message);
-            }
-            finally
-            {
 
-                if (SendSuccess != null)
-                {
-                    SendSuccess.Invoke();
-                }
-
+                AfterSender?.Invoke(false, ex.Message);
             }
 
         }
 
-       
+
 
         private static bool VerifyWithRegex(string emailAddress)
         {
