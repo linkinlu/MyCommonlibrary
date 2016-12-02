@@ -48,6 +48,7 @@
     <Compile Include="ConfigurationTest\RedisConfigTest.cs" />
     <Compile Include="ConvertionTest\BasicConverTest.cs" />
     <Compile Include="DateTimeTest\DateTimeTest.cs" />
+    <Compile Include="LogTest\LogTest.cs" />
     <Compile Include="MailTest\MailUtilTest.cs" />
     <Compile Include="OfficeTest\ExcelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

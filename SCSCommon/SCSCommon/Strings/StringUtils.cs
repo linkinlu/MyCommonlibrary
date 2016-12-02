@@ -37,6 +37,16 @@ namespace SCSCommon.Strings
             return !containsABadCharacter.IsMatch(fileName);
         }
 
+        public static bool IsMobileNumber(this string mobiles)
+        {
+            if (string.IsNullOrEmpty(mobiles))
+            {
+                return false;
+            }
+
+            var array = mobiles.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            return array.All(input => Regex.IsMatch(input, @"^1[3|4|5|7|8]\d{9}$"));
+        }
 
         /// <summary>
         /// Replaces the sensitive character.
