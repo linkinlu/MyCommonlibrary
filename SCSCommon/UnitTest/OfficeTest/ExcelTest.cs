@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using SCSCommon.DataTableEX;
 using SCSCommon.Office;
 
 namespace UnitTest.OfficeTest
@@ -22,15 +23,17 @@ namespace UnitTest.OfficeTest
                 {
                     ID = 3,
                     Name = "123",
-                    Code = "AI",
-                    MaxNumberOfUser = 525,
-                    IsDeleted = false,
-                    IsLocked = true
+                    CreateTime = DateTime.Now,
+                    Department = new Department() {ID = 1, Name = "departmenta"},
+                    IsLocked = true,
+                    Reason = CloseReason.ExceptionError
                 }
             };
 
-            ExcelUtils.ExportToExcel2003("D:\\", ls);
+            var items = ls.ToDataTable();
 
+            ExcelUtils.ExportToExcel2003("D:\\", ls);
+            var items1 = ExcelUtils.ReadExcel2003<Company>("D:\\20161202140848.xls");
 
 
         }
@@ -44,14 +47,28 @@ namespace UnitTest.OfficeTest
         
         public string Name { get; set; }
 
-        public string Code { get; set; }
 
-        
-        public int MaxNumberOfUser { get; set; }
+        public DateTime CreateTime { get; set; }
 
-        public bool IsDeleted { get; set; }
-
-      
         public bool IsLocked { get; set; }
+
+        public Department Department { get; set; }
+
+        public CloseReason Reason { get; set; }
     }
+
+    public class Department
+    {
+        public string Name { get; set; }
+
+        public int ID { get; set; }
+    }
+
+
+    public enum CloseReason
+    {
+        UserClose,
+        ExceptionError
+    }
+
 }
