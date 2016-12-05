@@ -24,6 +24,14 @@ namespace SCSCommon.Strings
             return VerifyWithRegex(address);
         }
 
+        public static bool IsNumber(this string number)
+        {
+            if (string.IsNullOrEmpty(number)) return false;
+
+            Regex regex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
+            return regex.IsMatch(number);
+        }
+
         /// <summary>
         /// Determines whether [is vaild file path].
         /// </summary>
@@ -69,13 +77,13 @@ namespace SCSCommon.Strings
         }
 
 
-      
 
 
 
 
 
 
+        #region private
         private static bool VerifyWithRegex(string emailAddress)
         {
             if (string.IsNullOrEmpty(emailAddress))
@@ -84,9 +92,10 @@ namespace SCSCommon.Strings
 
             Regex re = new Regex(strRegex);
             return re.IsMatch(emailAddress);
-        }      
-            
-        
+        }
+        #endregion
+
+
     }
 
 

@@ -15,6 +15,8 @@ namespace UnitTest.LogTest
         public void log()
         {
             LogUtil.LogException("123", new Exception() {});
+
+            LogUtil.LogInfo("这是一个测试");
         }
     }
 }

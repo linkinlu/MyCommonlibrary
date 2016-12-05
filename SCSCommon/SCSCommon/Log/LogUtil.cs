@@ -15,20 +15,25 @@ namespace SCSCommon.Log
     /// </summary>
     public class LogUtil
     {
-        private static readonly ILog exceptionFileLogger = LogManager.GetLogger(Assembly.GetCallingAssembly(), "File");
+        private static readonly ILog exceptionFileLogger = LogManager.GetLogger(Assembly.GetCallingAssembly(), "ExceptionFileLog");
         private static readonly ILog mailLogger = LogManager.GetLogger(Assembly.GetCallingAssembly(), "Mail");
-        //private static readonly ILog infoLogger = LogManager.GetLogger(Assembly.GetCallingAssembly(), "Info");
+        private static readonly ILog infoLogger = LogManager.GetLogger(Assembly.GetCallingAssembly(), "InfoFileLog");
+        private static readonly ILog dbLogger = LogManager.GetLogger(Assembly.GetCallingAssembly(), "DbLog");
+        
+
 
         public static void LogException(string message, Exception ex)
         {
             exceptionFileLogger.Error(message, ex);
-            mailLogger.Error(message, ex);
+            dbLogger.Error(message, ex);
+            //mailLogger.Error(message, ex);
         }
 
-        //public static void LogInfo(string message)
-        //{
-        //    infoLogger.Info(message);
-        //}
+        public static void LogInfo(string message)
+        {
+            infoLogger.Info(message);
+            
+        }
 
 
     }
