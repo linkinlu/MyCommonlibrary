@@ -81,7 +81,6 @@ namespace SCSCommon.Emunerable
             }
         }
 
-
         public static bool HasValue<T>(this IEnumerable<T> col)
         {
             return col != null && col.Any();

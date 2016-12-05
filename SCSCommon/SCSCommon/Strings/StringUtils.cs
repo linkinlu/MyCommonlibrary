@@ -12,13 +12,7 @@ namespace SCSCommon.Strings
 {
     public static class StringUtils
     {
-        /// <summary>
-        /// Determines whether [is mail address].
-        /// </summary>
-        /// <param name="address">The address.</param>
-        /// <returns>
-        ///   <c>true</c> if [is mail address] [the specified address]; otherwise, <c>false</c>.
-        /// </returns>
+        
         public static bool IsMailAddress(this string address)
         {
             return VerifyWithRegex(address);
@@ -32,13 +26,6 @@ namespace SCSCommon.Strings
             return regex.IsMatch(number);
         }
 
-        /// <summary>
-        /// Determines whether [is vaild file path].
-        /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        /// <returns>
-        ///   <c>true</c> if [is vaild file path] [the specified file name]; otherwise, <c>false</c>.
-        /// </returns>
         public static bool IsVaildFilePath(this string fileName)
         {
             Regex containsABadCharacter = new Regex("^([a-zA-Z]:)?(\\\\[^<>:\"/\\\\|?*]+)+\\\\?$");
@@ -56,13 +43,6 @@ namespace SCSCommon.Strings
             return array.All(input => Regex.IsMatch(input, @"^1[3|4|5|7|8]\d{9}$"));
         }
 
-        /// <summary>
-        /// Replaces the sensitive character.
-        /// </summary>
-        /// <param name="content">The content.</param>
-        /// <param name="sensitiveChars">The sensitive chars.</param>
-        /// <param name="repleaceChar">The repleace character.</param>
-        /// <returns></returns>
         public static string ReplaceSensitiveChar(this string content, string[] sensitiveChars,string repleaceChar)
         {
             if (sensitiveChars == null || !sensitiveChars.Any()) return content;
@@ -76,9 +56,19 @@ namespace SCSCommon.Strings
             return result;
         }
 
+        public static bool ContainCharaters(this string source, string charaters)
+        {
+            if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(charaters))
+            {
+                return false;
+            }
 
 
+           return charaters.Each(source.Contains);
+        }
 
+
+       
 
 
 

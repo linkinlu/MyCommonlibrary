@@ -19,7 +19,8 @@ namespace UnitTest.StringsTest
             var aa = item.ReplaceSensitiveChar(new string[] { "猪", "人" }, "*");
 
 
-
+            Assert.IsTrue(item.ContainCharaters("鸟人"));
+            Assert.IsFalse(item.ContainCharaters("鸟2"));
         }
 
     }

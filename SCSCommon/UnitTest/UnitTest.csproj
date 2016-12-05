@@ -52,6 +52,7 @@
     <Compile Include="MailTest\MailUtilTest.cs" />
     <Compile Include="OfficeTest\ExcelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomTest\RandomTest.cs" />
     <Compile Include="StringsTest\StringsTest.cs" />
   </ItemGroup>
   <ItemGroup>
