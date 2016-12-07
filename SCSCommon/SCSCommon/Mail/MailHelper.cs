@@ -9,6 +9,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using SCSCommon.Configuration;
 
 namespace SCSCommon.Mail
 {
@@ -21,13 +22,12 @@ namespace SCSCommon.Mail
 
         private static EmailSetting setting = null;
 
-        //TODO DB or config or xml 
+        //TODO DB or config or xml  TODO IOC
         static MailHelper()
         {
-
-            setting = new EmailSetting() { };
-           
-
+            IConfigurationFile config = new JsonConfiguration();
+            config.GetFile("~/", "emailSetting.json");
+            setting = config.Resolve<Email>().Setting;
         }
 
         internal void SendMail(string from, string to ,string content, string title = null,string[] bcc = null , string[] cc = null,string[] attachments = null)
@@ -59,19 +59,25 @@ namespace SCSCommon.Mail
 
                 SmtpClient client = new SmtpClient(setting.Address, setting.Port)
                 {
-                    Credentials = new NetworkCredential(setting.UserName, setting.Password),
+                    
                     EnableSsl = setting.EnableSSL,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     Timeout = setting.Timeout
                 };
 
+                if (string.IsNullOrEmpty(setting.UserName))
+                {
+                    client.Credentials = new NetworkCredential(setting.UserName, setting.Password);
+                }
 
 
                 MailMessage message = new MailMessage()
                 {
                     SubjectEncoding = Encoding.UTF8,
                     IsBodyHtml = true,
-                    BodyEncoding = Encoding.UTF8
+                    BodyEncoding = Encoding.UTF8,
+                    Body = content,
+                    Subject = title
                 };
                 to.Each(t => message.To.Add(t));
                 if (bcc != null && bcc.Any()) bcc.Each(t => message.Bcc.Add(t));
@@ -119,22 +125,5 @@ namespace SCSCommon.Mail
 
     }
 
-    internal class EmailSetting
-    {
-        public int Port { get; set; }
-
-        public string Address { get; set; }
-
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
-
-        public bool IsMailEnable { get; set; }
-
-        public bool IsAsyn { get; set; }
-
-        public bool EnableSSL { get; set; }
-
-        public int Timeout { get; set; }
-    }
+    
 }
