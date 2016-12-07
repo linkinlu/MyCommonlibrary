@@ -117,13 +117,20 @@
     <Compile Include="Cache\CacheScope\RedisCacheManager.cs" />
     <Compile Include="Cache\CacheScope\RedisCacheManagerWrapper.cs" />
     <Compile Include="Configuration\ConfigruationExtension.cs" />
-    <Compile Include="Configuration\RedisSection.cs" />
+    <Compile Include="Configuration\ConfigurationBase.cs" />
+    <Compile Include="Configuration\EmailTemplate.cs" />
+    <Compile Include="Configuration\Sample\EmailTemplateSection.cs" />
+    <Compile Include="Configuration\IConfigurationFile.cs" />
+    <Compile Include="Configuration\JsonConfiguration.cs" />
+    <Compile Include="Configuration\Sample\RedisSection.cs" />
+    <Compile Include="Configuration\XmlConfiguration.cs" />
     <Compile Include="Convertion\BasicConvert.cs" />
     <Compile Include="DataTableEx\DataTableUtil.cs" />
     <Compile Include="DateTimeExt\DateTimeUtils.cs" />
     <Compile Include="Directory\CommonDirectoryHelper.cs" />
     <Compile Include="Emunerable\EnumerableUtils.cs" />
     <Compile Include="IO\StringReaderHelper.cs" />
+    <Compile Include="IO\XmlTextWriterHelper.cs" />
     <Compile Include="Log\LogUtil.cs" />
     <Compile Include="Mail\MailHelper.cs" />
     <Compile Include="Mail\MailUtils.cs" />
@@ -141,8 +148,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Configuration\configFile\emailSetting.json" />
     <None Include="Log\Log4net.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\configFile\emailSetting.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

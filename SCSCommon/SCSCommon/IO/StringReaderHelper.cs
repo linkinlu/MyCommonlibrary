@@ -14,10 +14,10 @@ namespace SCSCommon.IO
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public static List<string> ReadTxtFile(string txtPath)
+        public static string ReadTxtFile(string txtPath)
         {
-            var result = new List<string>();
-            if (!File.Exists(txtPath)) return result;
+            var result = new StringBuilder();
+            if (!File.Exists(txtPath)) return string.Empty;
 
             try
             {
@@ -30,16 +30,31 @@ namespace SCSCommon.IO
                         if (string.IsNullOrEmpty(lineString))
                             continue;
 
-                        result.Add(lineString);
+                        result.AppendLine(lineString);
                     }
                 }
-                return result;
+                return result.ToString();
             }
             catch (Exception ex)
             {
-                return new List<string>();
+                return string.Empty;
             }
 
         }
     }
+
+    public class StreamReaderHelper
+    {
+        public static string ReadJson(string filePath)
+        {
+            if (!File.Exists(filePath)) return string.Empty;
+
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                return sr.ReadToEnd();
+            }
+
+        }
+    }
+
 }

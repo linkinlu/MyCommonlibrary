@@ -1,0 +1,26 @@
+{
+  "Setting": {
+    "Port": 25,
+    "Address": null,
+    "UserName": null,
+    "Password": null,
+    "IsMailEnable": false,
+    "IsAsyn": false,
+    "EnableSSL": false,
+    "Timeout": 0
+  },
+  "Templates": [
+    {
+      "Name": null,
+      "Title": null,
+      "Content": "asd",
+      "Footer": null
+    },
+    {
+      "Name": null,
+      "Title": null,
+      "Content": null,
+      "Footer": "asd"
+    }
+  ]
+}

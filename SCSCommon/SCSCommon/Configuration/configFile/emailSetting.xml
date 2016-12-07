@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gb2312"?>
+<MailConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EmailSetting Port="25" IsMailEnable="false" IsAsyn="false" EnableSSL="false" Timeout="0" />
+  <Templates>
+    <Template>
+      <Content>asd</Content>
+    </Template>
+    <Template>
+      <Footer>asd</Footer>
+    </Template>
+  </Templates>
+</MailConfig>
