@@ -20,21 +20,38 @@ namespace SCSCommon.Mail
 
         public event Action<bool, string> AfterSender;
 
-        private static EmailSetting setting = null;
+        private static EmailSetting setting = new EmailSetting();
+        private static List<EmailTemplate> templates = new List<EmailTemplate>();
 
         //TODO DB or config or xml  TODO IOC
         static MailHelper()
         {
             IConfigurationFile config = new JsonConfiguration();
             config.GetFile("~/", "emailSetting.json");
-            setting = config.Resolve<Email>().Setting;
+            var emailTemplate = config.Resolve<Email>();
+            if (emailTemplate != null)
+            {
+                setting = emailTemplate.Setting;
+                templates = emailTemplate.Templates.ToList();
+            }
         }
 
         internal void SendMail(string from, string to ,string content, string title = null,string[] bcc = null , string[] cc = null,string[] attachments = null)
         {
-            this.SendMail(from, new string[] { to }, title, content, bcc, cc, attachments);
+            this.SendMail(from, new[] { to }, title, content, bcc, cc, attachments);
         }
 
+        public void SendMailFromTemplate(string templateName, string @from, string[] to, string[] bcc = null, string[] cc = null, string[] attachments = null)
+        {
+            var template = templates.FirstOrDefault(t => t.Name == templateName);
+            if (template == null)
+            {
+                AfterSender?.Invoke(false, "没有找到短信模板");
+                return;
+            }
+
+            this.SendMail(from, to, template.Content,template.Title, bcc, cc, attachments);
+        }
 
         internal void SendMail(string from, string[] to,  string content, string title = null, string[] bcc = null, string[] cc = null, string[] attachments = null)
         {
@@ -65,7 +82,7 @@ namespace SCSCommon.Mail
                     Timeout = setting.Timeout
                 };
 
-                if (string.IsNullOrEmpty(setting.UserName))
+                if (!string.IsNullOrEmpty(setting.UserName))
                 {
                     client.Credentials = new NetworkCredential(setting.UserName, setting.Password);
                 }
@@ -73,12 +90,14 @@ namespace SCSCommon.Mail
 
                 MailMessage message = new MailMessage()
                 {
-                    SubjectEncoding = Encoding.UTF8,
+                 
                     IsBodyHtml = true,
                     BodyEncoding = Encoding.UTF8,
                     Body = content,
-                    Subject = title
+                    Subject = title,
+                    From = new MailAddress(from)
                 };
+                
                 to.Each(t => message.To.Add(t));
                 if (bcc != null && bcc.Any()) bcc.Each(t => message.Bcc.Add(t));
                 if (cc != null && bcc.Any()) cc.Each(t => message.CC.Add(t));
@@ -118,11 +137,7 @@ namespace SCSCommon.Mail
         }
 
 
-
-
-
-
-
+      
     }
 
     

@@ -1,19 +1,19 @@
 {
   "Setting": {
     "Port": 25,
-    "Address": null,
-    "UserName": null,
-    "Password": null,
-    "IsMailEnable": false,
+    "Address": "smtp.126.com",
+    "UserName": "bambooljm14@126.com",
+    "Password": "*******",
+    "IsMailEnable": true,
     "IsAsyn": false,
     "EnableSSL": false,
-    "Timeout": 0
+    "Timeout": 60000
   },
   "Templates": [
     {
-      "Name": null,
-      "Title": null,
-      "Content": "asd",
+      "Name": "Test",
+      "Title": "This is a test email",
+      "Content": "\u003cp\u003eWelcome to SiteName. To activate your account, visit this URL: \u003ca href=\"http://SiteName.com/a?key=1234\"\u003ehttp://SiteName.com/a?key=1234\u003c/a\u003e.\u003c/p\u003e",
       "Footer": null
     },
     {

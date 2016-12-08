@@ -31,5 +31,10 @@ namespace SCSCommon.Mail
         {
             helper.SendMail(from, to, content, title, bcc, cc, attachments);
         }
+
+        public void SendMailFromTemplate(string templateName, string from, string[] to)
+        {
+            helper.SendMailFromTemplate(templateName, from, to);
+        }
     }
 }

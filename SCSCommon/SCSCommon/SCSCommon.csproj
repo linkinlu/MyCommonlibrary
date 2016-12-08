@@ -130,6 +130,7 @@
     <Compile Include="Directory\CommonDirectoryHelper.cs" />
     <Compile Include="Emunerable\EnumerableUtils.cs" />
     <Compile Include="IO\StringReaderHelper.cs" />
+    <Compile Include="IO\XmlSectionWriter.cs" />
     <Compile Include="IO\XmlTextWriterHelper.cs" />
     <Compile Include="Log\LogUtil.cs" />
     <Compile Include="Mail\MailHelper.cs" />
