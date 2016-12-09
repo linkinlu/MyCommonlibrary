@@ -33,11 +33,20 @@ namespace UnitTest.IOTest
                 }
             };
             var item = new XmlSerializer(typeof(Email));
-            var memory = new MemoryStream();
-            var xmlwriter = new XmlTextWriter(memory, Encoding.UTF8);
-             item.Serialize(xmlwriter, email);
+           
 
-            Debug.Print(System.Text.Encoding.UTF8.GetString(memory.GetBuffer()));
+            var memory = new MemoryStream();
+            var writer = new StreamWriter(memory);
+            var xmlwriter = new NoNameSpaceXmlTextWriter(writer);
+
+            item.Serialize(xmlwriter, email);
+
+            Assert.IsNotNull(System.Text.Encoding.UTF8.GetString(memory.GetBuffer()));
+            
+            memory.Position = 0;
+
+            Assert.IsNotNull((Email) item.Deserialize(memory));
+
 
         }
     }
