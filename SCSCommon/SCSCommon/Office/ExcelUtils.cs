@@ -12,7 +12,7 @@ using NPOI.HPSF;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using SCSCommon.Convertion;
-using SCSCommon.Strings;
+using SCSCommon.Extension;
 using SCSCommon.DateTimeExt;
 using SCSCommon.Emunerable;
 

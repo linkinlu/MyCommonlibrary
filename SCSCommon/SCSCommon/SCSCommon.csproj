@@ -139,6 +139,7 @@
     <Compile Include="DateTimeExt\DateTimeUtils.cs" />
     <Compile Include="Directory\CommonDirectoryHelper.cs" />
     <Compile Include="Emunerable\EnumerableUtils.cs" />
+    <Compile Include="Extension\MathExtension.cs" />
     <Compile Include="IO\StringReaderHelper.cs" />
     <Compile Include="IO\NoNameSpaceXmlTextWriter.cs" />
     <Compile Include="IO\XmlTextWriterHelper.cs" />
@@ -151,7 +152,7 @@
     <Compile Include="QRCodeEx\QRCodeGeneratorHelper.cs" />
     <Compile Include="RandomEx\RandomEx.cs" />
     <Compile Include="Serialization\JavaScriptSerializerHelper.cs" />
-    <Compile Include="Strings\StringUtils.cs" />
+    <Compile Include="Extension\StringUtils.cs" />
     <Compile Include="Web\KnownMineType.cs" />
     <Compile Include="Web\WebUtils.cs" />
   </ItemGroup>

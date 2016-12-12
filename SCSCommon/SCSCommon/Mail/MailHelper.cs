@@ -1,5 +1,5 @@
 ﻿using SCSCommon.Emunerable;
-using SCSCommon.Strings;
+using SCSCommon.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;

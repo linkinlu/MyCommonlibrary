@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using SCSCommon.Convertion;
-using SCSCommon.Strings;
+using SCSCommon.Extension;
 
 namespace UnitTest.StringsTest
 {
@@ -21,6 +21,9 @@ namespace UnitTest.StringsTest
 
             Assert.IsTrue(item.ContainCharaters("鸟人"));
             Assert.IsFalse(item.ContainCharaters("鸟2"));
+
+
+            Assert.AreEqual(24, 4.Recursive());
         }
 
     }
