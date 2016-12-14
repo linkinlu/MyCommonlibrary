@@ -148,6 +148,10 @@
     <Compile Include="Mail\MailUtils.cs" />
     <Compile Include="MVC\SelectListExtension.cs" />
     <Compile Include="Office\ExcelUtils.cs" />
+    <Compile Include="Office\ExportManger.cs" />
+    <Compile Include="Office\PropertyByName.cs" />
+    <Compile Include="Office\ImportManager.cs" />
+    <Compile Include="Office\PropertyManger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QRCodeEx\QRCodeGeneratorHelper.cs" />
     <Compile Include="RandomEx\RandomEx.cs" />

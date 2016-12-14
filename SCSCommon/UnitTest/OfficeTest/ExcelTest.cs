@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,16 +28,76 @@ namespace UnitTest.OfficeTest
                     Department = new Department() {ID = 1, Name = "departmenta"},
                     IsLocked = true,
                     Reason = CloseReason.ExceptionError
+                },
+                 new Company()
+                {
+                    ID = 4,
+                    Name = "asdas",
+                    CreateTime = DateTime.Now,
+                    Department = new Department() {ID = 1, Name = "12@asd"},
+                    IsLocked = false,
+                    Reason = CloseReason.ExceptionError
                 }
             };
 
-            var items = ls.ToDataTable();
+            //var items = ls.ToDataTable();
 
-            ExcelUtils.ExportToExcel2003("D:\\", ls);
-            var items1 = ExcelUtils.ReadExcel2003<Company>("D:\\20161202140848.xls");
+            //ExcelUtils.ExportToExcel2003("D:\\", ls);
+            //var items1 = ExcelUtils.ReadExcel2003<Company>("D:\\20161202140848.xls");
 
 
-        }
+            //var nsm = new List<PropertyByName<Company>>()
+            //{
+            //    new PropertyByName<Company>("ID", t => t.ID),
+            //    new PropertyByName<Company>("name", t => t.Name, false),
+            //    new PropertyByName<Company>("departmentname", t => t.Department.Name),
+            //    new PropertyByName<Company>("IsLocked", t => t.IsLocked)
+            //};
+
+            //var bbb = ExportManger.ExportExcel<Company>(nsm, ls);
+
+
+
+            //using (FileStream fm = new FileStream("D:\\20161202140848.xls", FileMode.CreateNew))
+            //{
+            //    fm.Write(bbb, 0, bbb.Count());
+            //}
+
+            var manager = new PropertyManger<Company>(new List<PropertyByName<Company>>()
+            {
+                new PropertyByName<Company>("ID"),
+                new PropertyByName<Company>("name"),
+                new PropertyByName<Company>("departmentname")
+            });
+            //using (FileStream fm = new FileStream("D:\\20161202140848.xls", FileMode.Open))
+            //{
+            //    var items = ImportManager.ReadXls<Company>(fm, manager);
+
+            //    if (items != null)
+            //    {
+            //        var ls1 = new List<Company>();
+            //        items.ForEach(t =>
+            //        {
+            //            ls1.Add(new Company()
+            //            {
+            //                ID = t.GetProperty("id").GetIntVal(),
+            //            });
+            //        });
+            //    }
+            //}
+
+            }
+
+            
+            //Company com = new Company();
+            //com.Name =
+
+
+
+
+
+
+        
     }
     
     public class Company
@@ -70,5 +131,5 @@ namespace UnitTest.OfficeTest
         UserClose,
         ExceptionError
     }
-
 }
+
