@@ -40,7 +40,6 @@ namespace UnitTest.OfficeTest
                 }
             };
 
-            //var items = ls.ToDataTable();
 
             //ExcelUtils.ExportToExcel2003("D:\\", ls);
             //var items1 = ExcelUtils.ReadExcel2003<Company>("D:\\20161202140848.xls");
@@ -55,13 +54,12 @@ namespace UnitTest.OfficeTest
             //};
 
             //var bbb = ExportManger.ExportExcel<Company>(nsm, ls);
-
-
-
             //using (FileStream fm = new FileStream("D:\\20161202140848.xls", FileMode.CreateNew))
             //{
             //    fm.Write(bbb, 0, bbb.Count());
             //}
+
+
 
             var manager = new PropertyManger<Company>(new List<PropertyByName<Company>>()
             {
@@ -69,33 +67,16 @@ namespace UnitTest.OfficeTest
                 new PropertyByName<Company>("name"),
                 new PropertyByName<Company>("departmentname")
             });
-            //using (FileStream fm = new FileStream("D:\\20161202140848.xls", FileMode.Open))
-            //{
-            //    var items = ImportManager.ReadXls<Company>(fm, manager);
+            using (FileStream fm = new FileStream("D:\\20161202140848.xls", FileMode.Open))
+            {
+                ImportManager.ReadXls<Company>(fm);
 
-            //    if (items != null)
-            //    {
-            //        var ls1 = new List<Company>();
-            //        items.ForEach(t =>
-            //        {
-            //            ls1.Add(new Company()
-            //            {
-            //                ID = t.GetProperty("id").GetIntVal(),
-            //            });
-            //        });
-            //    }
-            //}
-
+             
             }
 
-            
-            //Company com = new Company();
-            //com.Name =
+        }
 
-
-
-
-
+           
 
         
     }
