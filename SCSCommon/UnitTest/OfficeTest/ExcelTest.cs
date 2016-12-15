@@ -19,27 +19,7 @@ namespace UnitTest.OfficeTest
         [Test]
         public void test()
         {
-            var ls = new List<Company>()
-            {
-                new Company()
-                {
-                    ID = 3,
-                    Name = "123",
-                    CreateTime = DateTime.Now,
-                    Department = new Department() {ID = 1, Name = "departmenta"},
-                    IsLocked = true,
-                    Reason = CloseReason.ExceptionError
-                },
-                 new Company()
-                {
-                    ID = 4,
-                    Name = "asdas",
-                    CreateTime = DateTime.Now,
-                    Department = new Department() {ID = 1, Name = "12@asd"},
-                    IsLocked = false,
-                    Reason = CloseReason.ExceptionError
-                }
-            };
+            var ls = Company.GetSampleObjLst();
 
 
             //ExcelUtils.ExportToExcel2003("D:\\", ls);
@@ -90,36 +70,6 @@ namespace UnitTest.OfficeTest
         
     }
     
-    public class Company
-    {
-  
-        public int ID { get; set; }
-
-        
-        public string Name { get; set; }
-
-
-        public DateTime CreateTime { get; set; }
-
-        public bool IsLocked { get; set; }
-
-        public Department Department { get; set; }
-
-        public CloseReason Reason { get; set; }
-    }
-
-    public class Department
-    {
-        public string Name { get; set; }
-
-        public int ID { get; set; }
-    }
-
-
-    public enum CloseReason
-    {
-        UserClose,
-        ExceptionError
-    }
+   
 }
 

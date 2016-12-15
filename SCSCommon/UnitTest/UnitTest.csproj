@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CacheTest\ExpireCacheScope\MemoryCacheManagerTest.cs" />
+    <Compile Include="Clone\MemoryCloneTest.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="ConfigurationTest\ConfigurationTest.cs" />
     <Compile Include="ConfigurationTest\RedisConfigTest.cs" />
     <Compile Include="ConvertionTest\BasicConverTest.cs" />

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using SCSCommon.Convertion;
 using SCSCommon.Extension;
+using UnitTest.OfficeTest;
 
 namespace UnitTest.StringsTest
 {
@@ -24,6 +25,12 @@ namespace UnitTest.StringsTest
 
 
             Assert.AreEqual(24, 4.Recursive());
+
+
+            Company com = new Company() {ID = 2};
+
+            
+
         }
 
     }

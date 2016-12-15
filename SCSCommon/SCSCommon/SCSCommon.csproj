@@ -130,6 +130,8 @@
     <Compile Include="Cache\CacheScope\MemoryCacheManager.cs" />
     <Compile Include="Cache\CacheScope\RedisCacheManager.cs" />
     <Compile Include="Cache\CacheScope\RedisCacheManagerWrapper.cs" />
+    <Compile Include="Clone\JsonDeepClone.cs" />
+    <Compile Include="Clone\MemoryDeepClone.cs" />
     <Compile Include="Configuration\ConfigruationExtension.cs" />
     <Compile Include="Configuration\ConfigurationBase.cs" />
     <Compile Include="Configuration\EmailTemplate.cs" />
