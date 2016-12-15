@@ -12,6 +12,14 @@ namespace SCSCommon.Office
 {
     public class ExportManger
     {
+        /// <summary>
+        /// Exports the excel.所有字段都是string类型的读取时需要自己转换
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="property">The property.</param>
+        /// <param name="entities">The entities.</param>
+        /// <param name="is2003">if set to <c>true</c> [is2003].</param>
+        /// <returns></returns>
         public static byte[] ExportExcel<T>(IList<PropertyByName<T>> property, IList<T> entities,bool is2003 = true)
         {
             if (property == null || !property.Any() || entities == null || !entities.Any())
