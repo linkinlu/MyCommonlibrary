@@ -11,10 +11,7 @@ namespace SCSCommon.Cache.ExpireCacheScope
     public class MemoryCacheManager : ICacheExpireScope
     {
         //private ConcurrentDictionary<string,string> tagContainer = new ConcurrentDictionary<string, string>();
-        protected ObjectCache InternalCache
-        {
-            get { return MemoryCache.Default; }
-        }
+        protected ObjectCache InternalCache => MemoryCache.Default;
 
         public  void Add(string key, object data, TimeSpan? expireTime=null)
         {

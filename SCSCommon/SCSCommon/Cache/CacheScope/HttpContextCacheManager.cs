@@ -13,7 +13,7 @@ namespace SCSCommon.Cache.ExpireCacheScope
     public class HttpContextCacheManager : ICacheExpireScope
     {
 
-        private List<string> keys = new List<string>();
+        private ConcurrentBag<string> keys = new ConcurrentBag<string>();
         public  System.Web.Caching.Cache Cache
         {
             get
@@ -32,7 +32,8 @@ namespace SCSCommon.Cache.ExpireCacheScope
             {
                 Remove(key);
             }
-            keys.Clear();
+            
+            //keys.Clear();
         }
 
         public  bool ContainKey(string key)
@@ -62,7 +63,7 @@ namespace SCSCommon.Cache.ExpireCacheScope
         public  void Remove(string key)
         {
             Cache.Remove(key);
-            keys.Remove(key);
+            //keys.TryTake(key);
         }
 
         public void RemoveByPattern(string parttern)

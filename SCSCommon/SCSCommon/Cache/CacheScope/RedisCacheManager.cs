@@ -28,7 +28,6 @@ namespace SCSCommon.Cache.ExpireCacheScope
 
         protected virtual T DeSerialize<T>(byte[] jsonBtye)
         {
-
             if (jsonBtye == null)
                 return default(T);
 
@@ -64,7 +63,7 @@ namespace SCSCommon.Cache.ExpireCacheScope
 
         public void RemoveByPattern(string parttern)
         {
-            throw new NotImplementedException();
+         
         }
 
 
