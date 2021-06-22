@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SCSCommon.DataTableEX
 {
-    public static class DataTableUtil
+    public static class DataTableEx
     {
         /// <summary>
         /// To the data table. 支持简单类型

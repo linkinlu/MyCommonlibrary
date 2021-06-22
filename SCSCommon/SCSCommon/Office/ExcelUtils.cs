@@ -15,6 +15,7 @@ using SCSCommon.Convertion;
 using SCSCommon.Extension;
 using SCSCommon.DateTimeExt;
 using SCSCommon.Emunerable;
+using System.IO;
 
 namespace SCSCommon.Office
 {
@@ -27,10 +28,6 @@ namespace SCSCommon.Office
         {
             if (!File.Exists(filePath)) return null;
             List<T> lst = new List<T>();
-
-
-            try
-            {
 
                 using (FileStream  fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 {
@@ -64,12 +61,7 @@ namespace SCSCommon.Office
                 }
                 return lst;
             }
-            catch (Exception ex)
-            {
-
-                return null;
-            }
-        }
+    
 
         /// <summary>
         /// Exports to excel2003.   
@@ -88,29 +80,8 @@ namespace SCSCommon.Office
             var fullName = Path.Combine(basePath,
                 string.IsNullOrEmpty(fileName) ? DateTime.Now.ToyyyyMMddHHmmss() + extension2003 : fileName + extension2003);
 
-
-
-            try
-            {
-
                 var book = new HSSFWorkbook();
                 ISheet sheet = book.CreateSheet();
-
-                #region 创建excel的summary信息
-                //var dsi = PropertySetFactory.CreateDocumentSummaryInformation();
-                //dsi.Company = "NPOI";
-                //book.DocumentSummaryInformation = dsi;
-                //SummaryInformation si = PropertySetFactory.CreateSummaryInformation();
-                //si.Author = "文件作者信息";
-                //si.ApplicationName = "创建程序信息";
-                //si.LastAuthor = "最后保存者信息";
-                //si.Comments = "作者信息";
-                //si.Title = "标题信息";
-                //si.Subject = "主题信息";
-                //si.CreateDateTime = DateTime.Now;
-                //book.SummaryInformation = si;
-                #endregion
-
 
                 #region 导出
 
@@ -163,29 +134,27 @@ namespace SCSCommon.Office
                 {
                     book.Write(sm);
                 }
-            }
-            catch (Exception ex)
-            {
-
-
-            }
+            
+        
         }
 
         public static void ExportToExcel2007<T>(string basePath, List<T> entity, string fileName = "")
         {
 
-            if (entity == null) return;
+            if (entity == null || entity.Count == 0) return;
             if (!basePath.IsVaildFilePath()) return;
 
+            if (!System.IO.Directory.Exists(basePath))
+            {
+                System.IO.Directory.CreateDirectory(basePath);
+            }
 
             var fullName = Path.Combine(basePath,
                 string.IsNullOrEmpty(fileName) ? DateTime.Now.ToyyyyMMddHHmmss() + extension2007: fileName + extension2007);
 
 
 
-            try
-            {
-
+      
                 var book = new XSSFWorkbook();
                 ISheet sheet = book.CreateSheet();
 
@@ -244,13 +213,7 @@ namespace SCSCommon.Office
                     book.Write(sm);
                 }
             }
-            catch (Exception ex)
-            {
-
-
-            }
-        }
-
+       
 
     }
 }

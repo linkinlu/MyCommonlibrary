@@ -84,9 +84,9 @@ namespace SCSCommon.DateTimeExt
 
     public class DateSpliterConstant
     {
-        public const string dateSpliter = "";
+        public const string dateSpliter = "-";
 
-        public const string timeSpliter = "";
+        public const string timeSpliter = ":";
 
     }
 }

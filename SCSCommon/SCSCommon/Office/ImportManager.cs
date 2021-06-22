@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Excel;
+//using Excel;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -21,20 +21,20 @@ namespace SCSCommon.Office
         public static DataTable ReadXls<T>(Stream stream, bool is2003 = true)
         {
 
-            IExcelDataReader excelReader = is2003
-                ? ExcelReaderFactory.CreateBinaryReader(stream)
-                : ExcelReaderFactory.CreateOpenXmlReader(stream);
+            //IExcelDataReader excelReader = is2003
+            //    ? ExcelReaderFactory.CreateBinaryReader(stream)
+            //    : ExcelReaderFactory.CreateOpenXmlReader(stream);
 
-            excelReader.IsFirstRowAsColumnNames = true;
-            DataSet result = excelReader.AsDataSet();
+            //excelReader.IsFirstRowAsColumnNames = true;
+            //DataSet result = excelReader.AsDataSet();
 
-            excelReader.Close();
+            //excelReader.Close();
 
-            if (result != null && result.Tables.Count > 0)
-            {
-                return result.Tables[0];
+            //if (result != null && result.Tables.Count > 0)
+            //{
+            //    return result.Tables[0];
 
-            }
+            //}
             return null;
         }
     }
