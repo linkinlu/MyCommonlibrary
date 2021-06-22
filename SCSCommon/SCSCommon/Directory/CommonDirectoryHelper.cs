@@ -22,8 +22,7 @@ namespace SCSCommon.Directory
                 return HostingEnvironment.MapPath(path);
             }
 
-            ///TRIMStart 的用法从字符串头去除包含这个关键字及之前的字符   如该字符串第一个字符不等于关键字就 直接返回这个字符串 
-            ///有点忘记了 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！ 温故知新
+            
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                 path.Replace("~/", "").TrimStart('/').Replace("/", "\\"));
         }

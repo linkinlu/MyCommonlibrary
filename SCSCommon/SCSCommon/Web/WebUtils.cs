@@ -105,5 +105,64 @@ namespace SCSCommon.Web
             }
             return Builder.ToString();
         }
+
+        public static string GetImageContentType(string extension)
+        {
+            if (string.IsNullOrEmpty(extension))
+                return null;
+
+            extension = extension.Trim();
+            if (extension[0] != '.')
+                extension = "." + extension;
+
+            extension = extension.ToLower();
+
+            string suffix = null;
+
+            switch (extension)
+            {
+                case ".jpeg":
+                case ".jpg":
+                case ".jpe":
+                case ".jfif":
+                    suffix = "jpeg";
+                    break;
+
+                case ".gif":
+                    suffix = "gif";
+                    break;
+
+                case ".png":
+                    suffix = "png";
+                    break;
+
+                case ".ico":
+                    suffix = "x-icon";
+                    break;
+
+                case ".tiff":
+                case ".tif":
+                    suffix = "tiff";
+                    break;
+
+                case ".fax":
+                    suffix = "fax";
+                    break;
+
+                case ".net":
+                    suffix = "pnetvue";
+                    break;
+
+                case ".rp":
+                    suffix = "vnd.rn-realpix";
+                    break;
+
+                case ".wbmp":
+                    suffix = "vnd.wap.wbmp";
+                    break;
+            }
+
+            return suffix == null ? null : "image/" + suffix;
+        }
     }
 }
