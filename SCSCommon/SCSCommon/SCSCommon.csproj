@@ -174,7 +174,7 @@
     <Compile Include="Configuration\XmlConfiguration.cs" />
     <Compile Include="Convertion\BasicConvert.cs" />
     <Compile Include="DataTableEx\DataTableEx.cs" />
-    <Compile Include="DateTimeExt\DateTimeUtils.cs" />
+    <Compile Include="Extension\DateTimeEx.cs" />
     <Compile Include="Directory\CommonDirectoryHelper.cs" />
     <Compile Include="Emunerable\EnumerableUtils.cs" />
     <Compile Include="Extension\AppConfigrationEx.cs" />
