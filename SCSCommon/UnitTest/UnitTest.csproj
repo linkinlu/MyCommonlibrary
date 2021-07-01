@@ -61,7 +61,6 @@
     <Compile Include="ConfigurationTest\ConfigurationTest.cs" />
     <Compile Include="ConfigurationTest\RedisConfigTest.cs" />
     <Compile Include="ConvertionTest\BasicConverTest.cs" />
-    <Compile Include="DateTimeTest\DateTimeTest.cs" />
     <Compile Include="ExtensionTest\AppConfigrationExTest.cs" />
     <Compile Include="IOTest\XmlSectionWriterTest.cs" />
     <Compile Include="LogTest\LogTest.cs" />

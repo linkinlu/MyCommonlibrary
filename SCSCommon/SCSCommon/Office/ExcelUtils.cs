@@ -13,7 +13,7 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using SCSCommon.Convertion;
 using SCSCommon.Extension;
-using SCSCommon.DateTimeExt;
+
 using SCSCommon.Emunerable;
 using System.IO;
 
@@ -78,7 +78,7 @@ namespace SCSCommon.Office
 
 
             var fullName = Path.Combine(basePath,
-                string.IsNullOrEmpty(fileName) ? DateTime.Now.ToyyyyMMddHHmmss() + extension2003 : fileName + extension2003);
+                string.IsNullOrEmpty(fileName) ? DateTime.Now.ToDateTimeString() + extension2003 : fileName + extension2003);
 
                 var book = new HSSFWorkbook();
                 ISheet sheet = book.CreateSheet();
@@ -150,7 +150,7 @@ namespace SCSCommon.Office
             }
 
             var fullName = Path.Combine(basePath,
-                string.IsNullOrEmpty(fileName) ? DateTime.Now.ToyyyyMMddHHmmss() + extension2007: fileName + extension2007);
+                string.IsNullOrEmpty(fileName) ? DateTime.Now.ToChineseDateTimeString() + extension2007: fileName + extension2007);
 
 
 

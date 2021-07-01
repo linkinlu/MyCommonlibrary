@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -53,21 +54,37 @@ namespace SCSCommon.DataTableEX
                                          Name = aHeader.ColumnName,
                                          Type = aHeader.DataType
                                      }).ToList();
-            var commonFields = objFieldNames.Intersect(dataTblFieldNames).ToList();
+            var commonFields = objFieldNames.Select(c=> c.Name).Intersect(dataTblFieldNames.Select(c=> c.Name) , new IgnoreCaseStringIEqualityComparer()).ToList();
 
             foreach (DataRow dataRow in dataTable.AsEnumerable().ToList())
             {
                 var aTSource = new T();
                 foreach (var aField in commonFields)
                 {
-                    PropertyInfo propertyInfos = aTSource.GetType().GetProperty(aField.Name);
-                    var value = (dataRow[aField.Name] == DBNull.Value) ?
-                    null : dataRow[aField.Name]; 
+                    PropertyInfo propertyInfos = aTSource.GetType().GetProperty(aField);
+                    var value = (dataRow[aField] == DBNull.Value) ?
+                    null : dataRow[aField]; 
                     propertyInfos.SetValue(aTSource, value, null);
                 }
                 dataList.Add(aTSource);
             }
             return dataList;
+        }
+
+
+
+    }
+
+    public class IgnoreCaseStringIEqualityComparer : IEqualityComparer<string>
+    {
+        public int GetHashCode(string obj)
+        {
+            return obj.GetHashCode();
+        }
+
+        public bool Equals(string x, string y)
+        {
+            return x.Equals(y, StringComparison.OrdinalIgnoreCase);
         }
     }
 

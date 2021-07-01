@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using log4net;
 using log4net.Config;
 
-[assembly: XmlConfigurator(Watch = true, ConfigFile = "Configs/Log4net.config")]
+[assembly: XmlConfigurator(Watch = true, ConfigFile = "Log4net.config")]
 namespace SCSCommon.Log
 {
     /// <summary>
