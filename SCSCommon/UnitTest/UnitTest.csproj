@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Consul, Version=1.6.1.1, Culture=neutral, PublicKeyToken=20a6ad9a81df1d95, processorArchitecture=MSIL">
+      <HintPath>..\packages\Consul.1.6.10.1\lib\net461\Consul.dll</HintPath>
+    </Reference>
     <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
       <Private>True</Private>
@@ -46,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -60,6 +64,7 @@
     <Compile Include="Company.cs" />
     <Compile Include="ConfigurationTest\ConfigurationTest.cs" />
     <Compile Include="ConfigurationTest\RedisConfigTest.cs" />
+    <Compile Include="Consul\ConsulTest.cs" />
     <Compile Include="ConvertionTest\BasicConverTest.cs" />
     <Compile Include="ExtensionTest\AppConfigrationExTest.cs" />
     <Compile Include="IOTest\XmlSectionWriterTest.cs" />

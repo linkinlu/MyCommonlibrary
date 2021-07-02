@@ -35,6 +35,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.8.6\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="Consul, Version=1.6.1.1, Culture=neutral, PublicKeyToken=20a6ad9a81df1d95, processorArchitecture=MSIL">
+      <HintPath>..\packages\Consul.1.6.10.1\lib\net461\Consul.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
     </Reference>
@@ -99,6 +102,7 @@
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -171,8 +175,10 @@
     <Compile Include="Configuration\JsonConfiguration.cs" />
     <Compile Include="Configuration\Sample\RedisSection.cs" />
     <Compile Include="Configuration\XmlConfiguration.cs" />
+    <Compile Include="Consul\ConsulUtils.cs" />
     <Compile Include="Convertion\BasicConvert.cs" />
-    <Compile Include="DataTableEx\DataTableEx.cs" />
+    <Compile Include="Extension\ArrayEx.cs" />
+    <Compile Include="Extension\DataTableEx.cs" />
     <Compile Include="Extension\DateTimeEx.cs" />
     <Compile Include="Directory\CommonDirectoryHelper.cs" />
     <Compile Include="Emunerable\EnumerableUtils.cs" />
@@ -202,7 +208,6 @@
     <Compile Include="Web\WebUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Consul\" />
     <Folder Include="GolbalResources\" />
     <Folder Include="MVC\" />
   </ItemGroup>
