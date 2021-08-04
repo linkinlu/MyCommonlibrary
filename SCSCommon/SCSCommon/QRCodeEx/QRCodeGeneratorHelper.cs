@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QRCoder;
+using ZXing;
 
 namespace SCSCommon.QRCodeEx
 {
@@ -33,6 +35,41 @@ namespace SCSCommon.QRCodeEx
                     return code.GetGraphic(20, Color.Black, Color.White, insideIcon, insidePercent);
                 }
             }
+        }
+
+        public static string DecodeQRCode(string base64)
+        {
+            if (string.IsNullOrEmpty(base64))
+            {
+                return string.Empty;
+            }
+
+            var actualBase64 = base64.Replace("data:image/jpg;base64,", string.Empty);
+    
+            var file = Convert.FromBase64String(actualBase64);
+            using (var ms = new MemoryStream(file, 0, file.Length))
+            {
+                var bt = new Bitmap(new MemoryStream(file));
+                IBarcodeReader reader = new BarcodeReader();
+                var res = reader.Decode(bt);
+                return res != null ? res.Text : string.Empty;
+            }
+        }
+
+
+        public static string DecodeQRCodeFromFile(string imageFilePath)
+        {
+            if (File.Exists(imageFilePath))
+            {
+                IBarcodeReader reader = new BarcodeReader();
+                var bt = (Bitmap)Image.FromFile(imageFilePath);
+                var res = reader.Decode(bt);
+                return res != null ? res.Text : string.Empty;
+            }
+
+            return "";
+
+           
         }
     }
 
