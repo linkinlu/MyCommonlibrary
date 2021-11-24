@@ -19,11 +19,13 @@ namespace UnitTest.OfficeTest
         [Test]
         public void test()
         {
+
+          
+
             var ls = Company.GetSampleObjLst();
 
 
-            //ExcelUtils.ExportToExcel2003("D:\\", ls);
-            //var items1 = ExcelUtils.ReadExcel2003<Company>("D:\\20161202140848.xls");
+         
 
 
             var nsm = new List<PropertyByName<Company>>()

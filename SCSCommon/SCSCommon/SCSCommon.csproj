@@ -218,6 +218,7 @@
     <Compile Include="Mail\MailUtils.cs" />
     <Compile Include="Office\ExcelUtils.cs" />
     <Compile Include="Office\ExportManger.cs" />
+    <Compile Include="Office\PrintHtmlToPdf.cs" />
     <Compile Include="Office\PropertyByName.cs" />
     <Compile Include="Office\ImportManager.cs" />
     <Compile Include="Office\PropertyManger.cs" />
