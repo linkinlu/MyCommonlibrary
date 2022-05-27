@@ -4,8 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SCSCommon.Directory;
-using System.Web.Script.Serialization;
+//using System.Web.Script.Serialization;
 using SCSCommon.IO;
 
 namespace SCSCommon.Configuration
@@ -15,7 +16,7 @@ namespace SCSCommon.Configuration
         private string readString = string.Empty;
         public override T Seriablize<T>()
         {
-            return new JavaScriptSerializer().Deserialize<T>(Content);
+            return JsonConvert.DeserializeObject<T>(Content);
         }
 
         public override void GetFile(string filePath, string fileName)

@@ -32,7 +32,8 @@ namespace SCSCommon.QRCodeEx
                 using (QRCodeData data = generaoter.CreateQrCode(text, level)) 
                 {
                     QRCode code = new QRCode(data);
-                    return code.GetGraphic(20, Color.Black, Color.White, insideIcon, insidePercent);
+                    //  return code.GetGraphic(20, Color.Black, Color.White, insideIcon, insidePercent);
+                    return null;
                 }
             }
         }
@@ -50,10 +51,14 @@ namespace SCSCommon.QRCodeEx
             using (var ms = new MemoryStream(file, 0, file.Length))
             {
                 var bt = new Bitmap(new MemoryStream(file));
-                IBarcodeReader reader = new BarcodeReader();
-                var res = reader.Decode(bt);
-                return res != null ? res.Text : string.Empty;
+             //   IBarcodeReader reader = new BarcodeReader();
+                //TODO
+                //b
+                //var res = reader.Decode(bt.b, bt.Width,bt.Height, bt.RawFormat);
+              //  return res != null ? res.Text : string.Empty;
             }
+
+            return string.Empty;
         }
 
 
@@ -61,10 +66,11 @@ namespace SCSCommon.QRCodeEx
         {
             if (File.Exists(imageFilePath))
             {
-                IBarcodeReader reader = new BarcodeReader();
-                var bt = (Bitmap)Image.FromFile(imageFilePath);
-                var res = reader.Decode(bt);
-                return res != null ? res.Text : string.Empty;
+               // IBarcodeReader reader = new BarcodeReader();
+                ///var bt = (Bitmap)Image.FromFile(imageFilePath);
+                //TODO
+               // var res = reader.Decode(bt);
+                //return res != null ? res.Text : string.Empty;
             }
 
             return "";

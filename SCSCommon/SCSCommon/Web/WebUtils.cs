@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -53,13 +54,13 @@ namespace SCSCommon.Web
         /// </summary>
         /// <param name="Request">The request.</param>
         /// <returns></returns>
-        public static IPAddress UserIPAddress(this HttpRequestBase Request)
-        {
-            IPAddress Address = null;
-            if (!IPAddress.TryParse(Request.UserHostAddress, out Address))
-                Address = null;
-            return Address;
-        }
+        //public static IPAddress UserIPAddress(this HttpRequestBase Request)
+        //{
+        //    IPAddress Address = null;
+        //    if (!IPAddress.TryParse(Request.UserHostAddress, out Address))
+        //        Address = null;
+        //    return Address;
+        //}
 
         /// <summary>
         /// Users the ip address.
@@ -69,9 +70,7 @@ namespace SCSCommon.Web
         public static IPAddress UserIPAddress(this HttpRequest Request)
         {
             IPAddress Address = null;
-            if (!IPAddress.TryParse(Request.UserHostAddress, out Address))
-                Address = null;
-            return Address;
+            return Request.UserIPAddress();
         }
 
         /// <summary>

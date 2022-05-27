@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Hosting.Internal;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Hosting;
+//using System.Web.Hosting;
 
 namespace SCSCommon.Directory
 {
@@ -17,14 +18,15 @@ namespace SCSCommon.Directory
         /// <returns></returns>
         public static string MapPath(string path)
         {
-            if (HostingEnvironment.IsHosted)
-            {
-                return HostingEnvironment.MapPath(path);
-            }
+            //if (HostingEnvironment.IsHosted)
+            //{
+            //    return HostingEnvironment.MapPath(path);
+            //}
 
             
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                path.Replace("~/", "").TrimStart('/').Replace("/", "\\"));
+            //return Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            //    path.Replace("~/", "").TrimStart('/').Replace("/", "\\"));
+            return string.Empty;
         }
 
         /// <summary>
@@ -35,14 +37,15 @@ namespace SCSCommon.Directory
         /// <returns></returns>
         public static string MapFullFileName(string path, string fileName)
         {
-            if (HostingEnvironment.IsHosted)
-            {
-                return Path.Combine(HostingEnvironment.MapPath(path), fileName);
-            }
+            return string.Empty;
+            //if (HostingEnvironment.IsHosted)
+            //{
+            //    return Path.Combine(HostingEnvironment.MapPath(path), fileName);
+            //}
 
-            return Path.Combine(
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                    path.Replace("~/", "").TrimStart('/').Replace("/", "\\")), fileName);
+            //return Path.Combine(
+            //    Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            //        path.Replace("~/", "").TrimStart('/').Replace("/", "\\")), fileName);
         }
 
     }

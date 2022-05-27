@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+///using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace SCSCommon.Clone
 {
@@ -13,9 +14,9 @@ namespace SCSCommon.Clone
         {
             if (obj == null) return default(T);
 
-            var ser = new JavaScriptSerializer();
-            var objJson = ser.Serialize(obj);
-            return ser.Deserialize<T>(objJson);
+            var ser = JsonConvert.SerializeObject(obj);
+            
+            return JsonConvert.DeserializeObject<T>(ser);
         }
     }
 }

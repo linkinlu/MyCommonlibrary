@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using SCSCommon.Directory;
 using System.IO;
 using System.Reflection;
-using System.Web.Script.Serialization;
+//using System.Web.Script.Serialization;
 using NPOI.HPSF;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -104,7 +104,7 @@ namespace SCSCommon.Office
                         colCell.SetCellValue(prop.Name);
                     });
                     var firstRow = 0;
-                    var ser = new JavaScriptSerializer();
+                //    var ser = new JavaScriptSerializer();
                     entity.EachWithIndex((rowIndex, prop) =>
                     {
                         firstRow++;
@@ -120,9 +120,9 @@ namespace SCSCommon.Office
                             else
 
                             {
-                                colCell.SetCellValue(propertyValue == null
-                                    ? string.Empty
-                                    : ser.Serialize(propertyValue));
+                                //colCell.SetCellValue(propertyValue == null
+                                //    ? string.Empty
+                                //    : ser.Serialize(propertyValue));
                             }
                         });
                     });
@@ -182,7 +182,7 @@ namespace SCSCommon.Office
                         colCell.SetCellValue(prop.Name);
                     });
                     var firstRow = 0;
-                    var ser = new JavaScriptSerializer();
+                    //var ser = new JavaScriptSerializer();
                     entity.EachWithIndex((rowIndex, prop) =>
                     {
                         firstRow++;
@@ -198,9 +198,9 @@ namespace SCSCommon.Office
                             else
 
                             {
-                                colCell.SetCellValue(propertyValue == null
-                                    ? string.Empty
-                                    : ser.Serialize(propertyValue));
+                                //colCell.SetCellValue(propertyValue == null
+                                //    ? string.Empty
+                                //    : ser.Serialize(propertyValue));
                             }
                         });
                     });

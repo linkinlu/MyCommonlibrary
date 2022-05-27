@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Configuration;
+
 
 namespace SCSCommon.Configuration
 {
@@ -23,9 +23,9 @@ namespace SCSCommon.Configuration
         {
             try
             {
-                string nodeValue = HttpContext.Current != null
-                    ? ConfigurationManager.AppSettings[key]
-                    : WebConfigurationManager.AppSettings[key];
+                string nodeValue =
+                    ConfigurationManager.AppSettings[key];
+                  
 
                 return string.IsNullOrEmpty(nodeValue) ? defaultValueFunc() : parseFunc(nodeValue);
             }
