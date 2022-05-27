@@ -207,6 +207,7 @@
     <Compile Include="Emunerable\EnumerableUtils.cs" />
     <Compile Include="Extension\AppConfigrationEx.cs" />
     <Compile Include="Extension\MathExtension.cs" />
+    <Compile Include="Extension\PasswordValidator.cs" />
     <Compile Include="IO\FtpUtil.cs" />
     <Compile Include="IO\HttpClientUtil.cs" />
     <Compile Include="IO\ImageUtils.cs" />
